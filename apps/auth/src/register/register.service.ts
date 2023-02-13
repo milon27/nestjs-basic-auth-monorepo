@@ -15,6 +15,7 @@ export class RegisterService {
         })
         // get+send token
         const token = this.jwt.generateToken({ userId: user.id })
+        //TODO: send token in http cookie with no expire
         return { ...user, token }
     }
 }
