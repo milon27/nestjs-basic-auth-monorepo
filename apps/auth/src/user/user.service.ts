@@ -1,10 +1,10 @@
 import { PrismaService } from '@app/prisma';
 import { Injectable } from '@nestjs/common';
-import { JwtService } from '../jwt/jwt.service';
+import { MyJwtService } from '../jwt/jwt.service';
 
 @Injectable()
 export class UserService {
-    constructor(private prisma: PrismaService, private jwt: JwtService) { }
+    constructor(private prisma: PrismaService, private jwt: MyJwtService) { }
 
     getUserById(userId: string) {
         const user = this.prisma.user.findUnique({

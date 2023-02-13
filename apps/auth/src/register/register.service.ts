@@ -1,11 +1,11 @@
 import { PrismaService } from '@app/prisma';
 import { Injectable } from '@nestjs/common';
-import { JwtService } from '../jwt/jwt.service';
+import { MyJwtService } from '../jwt/jwt.service';
 import { RegisterDto } from './dto/register.dto';
 
 @Injectable()
 export class RegisterService {
-    constructor(private readonly prisma: PrismaService, private readonly jwt: JwtService) { }
+    constructor(private readonly prisma: PrismaService, private readonly jwt: MyJwtService) { }
 
     async signUp(registerDto: RegisterDto) {
         const user = await this.prisma.user.create({

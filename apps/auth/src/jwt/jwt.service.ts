@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { JwtService as JWT } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
 import { IJwtPayload } from './interfaces/jwt.payload.interface';
 
 @Injectable()
-export class JwtService extends JWT {
+export class MyJwtService extends JwtService {
     generateToken(payload: IJwtPayload) {
         try {
             const token = this.sign(payload, {

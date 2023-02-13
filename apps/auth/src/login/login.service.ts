@@ -1,11 +1,11 @@
 import { PrismaService } from '@app/prisma';
 import { Injectable } from '@nestjs/common';
-import { JwtService } from '../jwt/jwt.service';
+import { MyJwtService } from '../jwt/jwt.service';
 import { LoginWithEmailDto } from './dto/login.dto';
 
 @Injectable()
 export class LoginService {
-  constructor(private readonly prisma: PrismaService, private readonly jwt: JwtService) { }
+  constructor(private readonly prisma: PrismaService, private readonly jwt: MyJwtService) { }
 
   async loginWithEmail(data: LoginWithEmailDto) {
     const user = await this.prisma.user.findUnique({

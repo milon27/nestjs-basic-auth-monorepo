@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { JwtModule } from '../jwt/jwt.module';
+import { MyJwtModule } from '../jwt/jwt.module';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 
 @Module({
-  imports: [JwtModule],
+  imports: [MyJwtModule],
   controllers: [UserController],
   providers: [UserService]
 })

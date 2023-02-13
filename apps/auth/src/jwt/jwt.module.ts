@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { JwtService } from './jwt.service';
+import { MyJwtService } from './jwt.service';
 
 // @Global()
 @Module({
-  providers: [JwtService],
-  exports: [JwtService]
+  providers: [MyJwtService],
+  exports: [MyJwtService]
 })
-export class JwtModule { }
+export class MyJwtModule { }
