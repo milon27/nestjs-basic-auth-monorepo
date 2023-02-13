@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String @id @default(cuid())
+  name  String
+  email String @unique
+
+  @@map("user")
+}
+
+model Topic {
+  id            String  @id @default(cuid())
+  slug          String  @unique
+  title         String
+  parentTopicId String?
+  parentTopic   Topic?  @relation("parent", fields: [parentTopicId], references: [id])
+  topics        Topic[] @relation("parent")
+
+  guides Guide[]
+
+  @@map("topic")
+}
+
+model Guide {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  youtube_url String
+  createdAt   DateTime @default(now()) @db.DateTime(0)
+
+  Topic   Topic  @relation(fields: [topicId], references: [id])
+  topicId String
+
+  @@map("guide")
+}
