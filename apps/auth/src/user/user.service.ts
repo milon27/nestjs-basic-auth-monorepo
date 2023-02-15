@@ -1,17 +1,28 @@
+import { KafkaProducerService } from '@app/kafka';
+import { KafkaTopicDefine } from '@app/kafka/kafka.define';
 import { PrismaService } from '@app/prisma';
 import { Injectable } from '@nestjs/common';
-import { MyJwtService } from '../jwt/jwt.service';
 
 @Injectable()
 export class UserService {
-    constructor(private prisma: PrismaService, private jwt: MyJwtService) { }
+    constructor(private prisma: PrismaService, private producer: KafkaProducerService) { }
 
-    getUserById(userId: string) {
-        const user = this.prisma.user.findUnique({
+    async getUserById(userId: string) {
+        const user = await this.prisma.user.findUnique({
             where: {
                 id: userId
             }
         })
+        //produce user object
+        if (user) {
+            const data = JSON.stringify(user)
+            await this.producer.produceMessage({
+                topic: KafkaTopicDefine.AUTH_GET_USER,
+                messages: [{
+                    value: data
+                }]
+            })
+        }
         return user
     }
 }

@@ -3,7 +3,7 @@ import { DevGuideService } from './dev-guide.service';
 
 @Controller()
 export class DevGuideController {
-  constructor(private readonly devGuideService: DevGuideService) {}
+  constructor(private readonly devGuideService: DevGuideService) { }
 
   @Get()
   getHello(): string {

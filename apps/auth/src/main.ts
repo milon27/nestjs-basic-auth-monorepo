@@ -18,6 +18,9 @@ async function bootstrap() {
   }))
 
   app.setGlobalPrefix(globalPrefix);
-  await app.listen(process.env.AUTH_PORT || 2727);
+  const port = process.env.AUTH_PORT || 2727
+  await app.listen(port, () => {
+    console.log(`Auth running on port ${port}`);
+  });
 }
 bootstrap();
